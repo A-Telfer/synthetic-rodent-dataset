@@ -1,0 +1,11 @@
+matplotlib
+black
+flake8
+isort
+loguru
+mkdocs
+pip
+python-dotenv
+setuptools
+typer
+-e .
