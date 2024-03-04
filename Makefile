@@ -54,6 +54,12 @@ render-demo: requirements
 extract-real-frames: requirements
 	$(PYTHON_INTERPRETER) synthetic_rodents/extract_frames.py
 
+
+.PHONY: create-dlc-for-manual-labelers
+create-dlc-for-manual-labelers: requirements
+	$(PYTHON_INTERPRETER) synthetic_rodents/create_dlc_project_for_manual_labels.py
+
+	
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################

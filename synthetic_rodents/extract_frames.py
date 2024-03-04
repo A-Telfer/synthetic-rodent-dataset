@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import logging 
 
+from synthetic_rodents import constants
 from pathlib import Path
 from typing import List, Tuple
 from tqdm import tqdm
@@ -12,21 +13,12 @@ from PIL import Image
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-SEED = 42
-TRAINING_FRAMES = 200
-EVALUATION_FRAMES = 100
-
-REAL_FRAMES_TRAINING_FOLDER = Path('data/real_frames/training')
-REAL_FRAMES_TRAINING_FOLDER.mkdir(exist_ok=True, parents=True)
-
-REAL_FRAMES_EVALUATION_FOLDER = Path('data/real_frames/evaluation')
-REAL_FRAMES_EVALUATION_FOLDER.mkdir(exist_ok=True, parents=True)
 
 videos = list(sorted(Path('data/videos').glob('*.mp4')))
 logger.info(f"Found {len(videos)} videos")
 
-np.random.seed(SEED)
-logger.info(f"Using seed {SEED}")
+np.random.seed(constants.SEED)
+logger.info(f"Using seed {constants.SEED}")
 
 def extract_frame_randomly(videos, output_folder):
     video = np.random.choice(videos)
@@ -45,13 +37,13 @@ def extract_frame_randomly(videos, output_folder):
     output_path = output_folder / f"{video.stem}_{frame_index:05}.png"
     image.save(output_path)
 
-logger.info(f"Extracting {TRAINING_FRAMES} training frames")
-for _ in tqdm(range(TRAINING_FRAMES)):
-    extract_frame_randomly(videos, REAL_FRAMES_TRAINING_FOLDER)
+logger.info(f"Extracting {constants.REAL_TRAINING_FRAMES} training frames")
+for _ in tqdm(range(constants.REAL_TRAINING_FRAMES)):
+    extract_frame_randomly(videos, constants.REAL_FRAMES_TRAINING_FOLDER)
 
-logger.info(f"Extracting {EVALUATION_FRAMES} evaluation frames")
-for _ in tqdm(range(EVALUATION_FRAMES)):
-    extract_frame_randomly(videos, REAL_FRAMES_EVALUATION_FOLDER)
+logger.info(f"Extracting {constants.REAL_EVALUATION_FRAMES} evaluation frames")
+for _ in tqdm(range(constants.REAL_EVALUATION_FRAMES)):
+    extract_frame_randomly(videos, constants.REAL_FRAMES_EVALUATION_FOLDER)
 
-assert len(list(REAL_FRAMES_TRAINING_FOLDER.glob('*.png'))) == TRAINING_FRAMES
-assert len(list(REAL_FRAMES_EVALUATION_FOLDER.glob('*.png'))) == EVALUATION_FRAMES
+assert len(list(constants.REAL_FRAMES_TRAINING_FOLDER.glob('*.png'))) == constants.REAL_TRAINING_FRAMES
+assert len(list(constants.REAL_FRAMES_EVALUATION_FOLDER.glob('*.png'))) == constants.REAL_EVALUATION_FRAMES

@@ -8,4 +8,8 @@ pip
 python-dotenv
 setuptools
 typer
+opencv-python-headless
+tqdm 
+pillow
+deeplabcut[tf]
 -e .
