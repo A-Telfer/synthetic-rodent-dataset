@@ -48,6 +48,12 @@ render-demo: requirements
 	$(PYTHON_INTERPRETER) synthetic_rodents/data/demo/visualize.py
 	echo "Demo dataset rendered and visualized data/tests/demo"
 
+
+## Make Demo Dataset
+.PHONY: extract-real-frames
+extract-real-frames: requirements
+	$(PYTHON_INTERPRETER) synthetic_rodents/extract_frames.py
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
