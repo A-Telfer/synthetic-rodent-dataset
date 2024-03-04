@@ -8,3 +8,10 @@ conda activate synth-rodent
 make requirements 
 make render-demo
 ```
+
+### Extracting Evaluation Frames from Real Videos
+
+Download and link to the video folder, or place them inside data/videos
+```
+ln -s /path/to/downloaded/videos data/videos
+```

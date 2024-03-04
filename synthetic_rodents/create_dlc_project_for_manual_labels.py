@@ -28,6 +28,8 @@ for scorer in constants.SCORERS:
     # Copy the labeled data to the deeplabcut projects
     logger.info(f"Copying the labeled data to the project {config_path}")
     labeled_data_folder = Path(config_path).parent / "labeled-data"
+    shutil.rmtree(labeled_data_folder, ignore_errors=True)
+    labeled_data_folder.mkdir(exist_ok=True, parents=True)
 
     logger.info("Copying the labeled data to %s", labeled_data_folder / 'training_frames')
     shutil.copytree(constants.REAL_FRAMES_TRAINING_FOLDER, labeled_data_folder / 'training_frames')
