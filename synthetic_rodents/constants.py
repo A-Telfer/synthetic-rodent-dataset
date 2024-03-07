@@ -2,28 +2,19 @@ from pathlib import Path
 
 SEED = 42
 
-REAL_TRAINING_FRAMES = 200
-REAL_EVALUATION_FRAMES = 100
+FRAMES_PER_VIDEO = 5
+TRAIN_TEST_SPLIT = 0.8
 
 PROJECT_DIR = Path(__file__).parents[1].absolute()
 
 REAL_VIDEOS_FOLDER = PROJECT_DIR / "data/videos"
 assert REAL_VIDEOS_FOLDER.exists()
 
-REAL_FRAMES_TRAINING_FOLDER = PROJECT_DIR / "data/real_frames/training"
-REAL_FRAMES_TRAINING_FOLDER.mkdir(exist_ok=True, parents=True)
+REAL_DATA_FOLDER = PROJECT_DIR / "data/real_data"
+REAL_DATA_FOLDER.mkdir(exist_ok=True, parents=True)
 
-REAL_FRAMES_EVALUATION_FOLDER = PROJECT_DIR / "data/real_frames/evaluation"
-REAL_FRAMES_EVALUATION_FOLDER.mkdir(exist_ok=True, parents=True)
-
-DEEPLABCUT_MANUAL_LABELS_FOLDER = PROJECT_DIR / "data/deeplabcut/manual_labels"
-DEEPLABCUT_MANUAL_LABELS_FOLDER.mkdir(exist_ok=True, parents=True)
-
-SCORERS = [
-    "user1",
-    "user2",
-    "user3"
-]
+REAL_IMAGES_FOLDER = REAL_DATA_FOLDER / "images"
+REAL_IMAGES_FOLDER.mkdir(exist_ok=True, parents=True)
 
 BODYPARTS = [
     "nose",
