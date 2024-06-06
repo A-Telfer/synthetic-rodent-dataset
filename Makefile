@@ -5,6 +5,7 @@
 PROJECT_NAME = synthetic_rodents
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
+BLENDER = /home/andretelfer/blender-3.4.1-linux-x64/blender
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -36,17 +37,13 @@ lint:
 format:
 	black --config pyproject.toml synthetic_rodents
 
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
 
-
-## Make Demo Dataset
-.PHONY: render-demo
-render-demo: requirements
-	$(BLENDER) data/blender/demo.blend --background --python synthetic_rodents/data/demo/make_dataset.py
-	$(PYTHON_INTERPRETER) synthetic_rodents/data/demo/visualize.py
-	echo "Demo dataset rendered and visualized data/tests/demo"
+## Render the 20240530 dataset 
+.PHONY: render-demo-20240530
+render-demo-20240530: requirements
+	$(BLENDER) data/blender/demo_20240530.blend --background --python synthetic_rodents/data/demo_20240530/make_dataset.py
+	$(PYTHON_INTERPRETER) synthetic_rodents/data/demo_20240530/visualize.py
+	echo "Demo dataset rendered and visualized data/tests/demo_20240530"
 
 
 ## Make Demo Dataset
@@ -54,6 +51,7 @@ render-demo: requirements
 extract-real-frames: requirements
 	$(PYTHON_INTERPRETER) synthetic_rodents/extract_frames.py
 	
+
 
 #################################################################################
 # Self Documenting Commands                                                     #
@@ -64,7 +62,7 @@ extract-real-frames: requirements
 define PRINT_HELP_PYSCRIPT
 import re, sys; \
 lines = '\n'.join([line for line in sys.stdin]); \
-matches = re.findall(r'\n## (.*)\n[\s\S]+?\n([a-zA-Z_-]+):', lines); \
+matches = re.findall(r'\n## (.*)\n[\s\S]+?\n([a-zA-Z0-9_-]+):', lines); \
 print('Available rules:\n'); \
 print('\n'.join(['{:25}{}'.format(*reversed(match)) for match in matches]))
 endef
